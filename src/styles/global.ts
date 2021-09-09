@@ -23,12 +23,11 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body, input, textarea, button {
-        font-family: 'Alata', sans-serif;
-        font-family: 'Josefin Sans', sans-serif;
+        font-family: 'Space Mono', sans-serif;
     }
 
     h1, h2, h3, h4, h5, h6, strong {
-        font-family: 'Alata', sans-serif;
+        font-family: 'Space Mono', sans-serif;
     }
 
     button {
