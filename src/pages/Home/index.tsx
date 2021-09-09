@@ -52,7 +52,7 @@ const Home:React.FC = () => {
     const [themeStyle, setThemeStyle] = useState(() => theme.title === 'dark' ? true : false);
 
     const [username, setUsername] = useState('');
-    const [userNotFound, setUserNotFound] = useState("false");
+    const [userNotFound, setUserNotFound] = useState(false);
 
     const [info, setInfo] = useState<UserProps>();
 
@@ -63,11 +63,11 @@ const Home:React.FC = () => {
 
             if (response.status === 200){
                 setInfo(response.data);
-            } else if (response.status === 404){
-                setUserNotFound("true");
+                setUserNotFound(false);
             }
         } catch (err){
             console.log(err);
+            setUserNotFound(true);
         }
     }
 
@@ -80,7 +80,7 @@ const Home:React.FC = () => {
             <Content>
                 <Header>
                     <h1>devfinder</h1> 
-                    <h1>{userNotFound}-</h1> 
+                    <h1>{userNotFound}</h1> 
                     <div onClick={handleChangeTheme}>
                         <span>
                             {themeStyle ? "LIGHT" : "DARK"} 
@@ -92,14 +92,14 @@ const Home:React.FC = () => {
                     </div>
                 </Header>
 
-                <SearchBar userNotFound={true}>
+                <SearchBar userNotFound={userNotFound}>
                     <img src={searchIcon} alt="search"/>
                     <input 
                         type="text" 
                         placeholder="Search GitHub username..."
                         onChange={(e) => setUsername(e.target.value)}
                     />
-                    {/* <p>No results</p> */}
+                    <p>No results</p>
                     <button 
                         type="button"
                         onClick={getInfo}
@@ -151,7 +151,10 @@ const Home:React.FC = () => {
                         </RepoInfo>
 
                         <FooterInfo>
-                            <CityInfo>
+                            <CityInfo
+                                locationFound={info?.location ? true : false}
+                                twitterFound={info?.twitter_username ? true : false}
+                            >
                                 <div className="city-info">
                                     <LocationIcon />
                                     <span>{info?.location ? info.location : "Not available"}</span>
@@ -162,7 +165,10 @@ const Home:React.FC = () => {
                                 </div>
                             </CityInfo>
 
-                            <BlogInfo>
+                            <BlogInfo
+                                webSiteFound={info?.blog ? true : false}
+                                companyFound={info?.company ? true : false}                            
+                            >
                                 <div className="web-site-info">
                                     <WebsiteIcon />
                                     <a 

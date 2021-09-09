@@ -4,6 +4,16 @@ interface SearchBarProps{
     userNotFound: boolean;
 }
 
+interface CityInfoProps{
+    locationFound: boolean;
+    twitterFound: boolean;
+}
+
+interface BlogInfoProps{
+    webSiteFound: boolean;
+    companyFound: boolean;
+}
+
 export const Container = styled.div`
     height: 100vh;
     width: 100%;
@@ -447,20 +457,24 @@ export const FooterInfo = styled.div`
 `;
 
 
-export const CityInfo = styled.div`
+export const CityInfo = styled.div<CityInfoProps>`
     display: flex;
+    position: relative;
 
     .city-info{
         display: flex;
         align-items: center;
         justify-content: center;
+        position: absolute;
 
         span {
             margin-left: 21px;
             color: ${({theme}) => theme.color.tertiary};
+            opacity: ${props => props.locationFound ? 1 : .3};
         }
         
         svg {
+            opacity: ${props => props.locationFound ? 1 : .3};
             path {
                 fill: ${({theme}) => theme.color.tertiary};
             }
@@ -471,14 +485,17 @@ export const CityInfo = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-left: 60px;
+        position: absolute;
+        right: 72px;
 
         span {
             margin-left: 21px;
             color: ${({theme}) => theme.color.tertiary};
+            opacity: ${props => props.twitterFound ? 1 : .3};
         }
         
         svg {
+            opacity: ${props => props.twitterFound ? 1 : .3};
             path {
                 fill: ${({theme}) => theme.color.tertiary};
             }
@@ -492,8 +509,8 @@ export const CityInfo = styled.div`
         align-items: flex-start;
 
         .twitter-info{
-            margin-left: 0;
-            margin-top: 21px;
+            left: -43px;
+            top: 45px;
 
             span {
                 margin-left: 15px;
@@ -503,22 +520,26 @@ export const CityInfo = styled.div`
 `;
 
 
-export const BlogInfo = styled.div`
+export const BlogInfo = styled.div<BlogInfoProps>`
     display: flex;
-    margin-top: 21px;
+    margin-top: 45px;
+    position: relative;
 
     .web-site-info{
         display: flex;
         align-items: center;
         justify-content: center;
+        position: absolute;
 
         a {
             margin-left: 16px;
             text-decoration: none;
             color: ${({theme}) => theme.color.tertiary};
+            opacity: ${props => props.webSiteFound ? 1 : .3};
         }
         
         svg {
+            opacity: ${props => props.webSiteFound ? 1 : .3};
             path {
                 fill: ${({theme}) => theme.color.tertiary};
             }
@@ -529,14 +550,17 @@ export const BlogInfo = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-left: 60px;
+        position: absolute;
+        right: 72px;
 
         span {
             margin-left: 21px;
             color: ${({theme}) => theme.color.tertiary};
+            opacity: ${props => props.companyFound ? 1 : .3};
         }
         
         svg {
+            opacity: ${props => props.companyFound ? 1 : .3};
             path {
                 fill: ${({theme}) => theme.color.tertiary};
             }
@@ -547,11 +571,18 @@ export const BlogInfo = styled.div`
     @media(max-width: 539px){
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        background: red;
+
+        .web-site-info{
+            position: absolute;
+            top: 45px;
+        }
+        
 
         .github-info{
-            margin-left: 0;
-            margin-top: 21px;
+            position: absolute;
+            top: 90px;
+            left: -42px;
 
             span {
                 margin-left: 15px;
