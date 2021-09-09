@@ -79,7 +79,10 @@ const Home:React.FC = () => {
                         </UserNameInfo>
 
                         <InfoBio>
-                            <p>This profile has no bio</p>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
+                                Donec odio. Quisque volutpat mattis eros.
+                            </p>
                         </InfoBio>
 
                         <RepoInfo>
