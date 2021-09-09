@@ -12,6 +12,7 @@ declare module 'styled-components' {
                 background: string;
                 lightText: string;
                 logoColor: string;
+                shadow: string;
             }
     }
 }

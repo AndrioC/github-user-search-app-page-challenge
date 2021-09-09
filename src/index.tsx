@@ -6,7 +6,7 @@ import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider>
+    <ThemeProvider >
       <App />
     </ThemeProvider>
   </React.StrictMode>,

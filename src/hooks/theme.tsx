@@ -21,6 +21,7 @@ interface ITheme {
         background: string;
         lightText: string;
         logoColor: string;
+        shadow: string;
     }
 }
 
@@ -33,7 +34,7 @@ const ThemeProvider: React.FC = ({ children }) => {
         if (themeSaved){
             return JSON.parse(themeSaved)
         }else {
-            return dark
+            return light
         }
     })
 

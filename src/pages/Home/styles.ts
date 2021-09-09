@@ -40,10 +40,17 @@ export const Header = styled.div`
         font-size: 13px;
         font-weight: bold;  
 
-        img {
+     
+
+        svg {
             margin-left: 15px;
             width: 21px;
             height: 21px;
+        }
+
+        :hover {
+            cursor: pointer;
+            opacity: .5;
         }
     }
 `;
@@ -58,17 +65,24 @@ export const SearchBar = styled.div`
     display: flex;
     align-items: center;
     position: relative;
-    box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.198567);
+    box-shadow: ${({theme}) => theme.color.shadow};
 
     img {
         margin-left: 36px;
         margin-right: 24px;
+        color: red;
+        
+        svg {
+            color: red;
+        }
     }
 
     input {     
-        font-size: 18px;
+        font-size: 18px;            
+        background: ${({theme}) => theme.color.lightText};
         width: 282px;
         border: none;
+        color: ${({theme}) => theme.color.tertiary};
         ::placeholder{
             color: ${({theme}) => theme.color.tertiary};
         }
@@ -102,7 +116,7 @@ export const ShowInfoContainer = styled.div`
     position: relative;            
     background: ${({theme}) => theme.color.lightText};
     border-radius: 15px;
-    box-shadow: 0px 16px 30px -10px rgba(70, 96, 187, 0.198567);
+    box-shadow: ${({theme}) => theme.color.shadow};
 `;
 
 
@@ -238,6 +252,12 @@ export const CityInfo = styled.div`
             margin-left: 21px;
             color: ${({theme}) => theme.color.tertiary};
         }
+        
+        svg {
+            path {
+                fill: ${({theme}) => theme.color.tertiary};
+            }
+        }
     }
 
     .twitter-info{
@@ -249,6 +269,12 @@ export const CityInfo = styled.div`
         span {
             margin-left: 21px;
             color: ${({theme}) => theme.color.tertiary};
+        }
+        
+        svg {
+            path {
+                fill: ${({theme}) => theme.color.tertiary};
+            }
         }
     }
 `;
@@ -268,6 +294,12 @@ export const BlogInfo = styled.div`
             text-decoration: none;
             color: ${({theme}) => theme.color.tertiary};
         }
+        
+        svg {
+            path {
+                fill: ${({theme}) => theme.color.tertiary};
+            }
+        }
     }
 
     .github-info{
@@ -279,6 +311,12 @@ export const BlogInfo = styled.div`
         span {
             margin-left: 21px;
             color: ${({theme}) => theme.color.tertiary};
+        }
+        
+        svg {
+            path {
+                fill: ${({theme}) => theme.color.tertiary};
+            }
         }
     }
 `;

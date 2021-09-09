@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import {
     Container,
@@ -19,18 +19,42 @@ import {
 
 import moonIcon from '../../assets/icon-moon.svg';
 import searchIcon from '../../assets/icon-search.svg';
-import locationIcon from '../../assets/icon-location.svg';
-import twitterIcon from '../../assets/icon-twitter.svg';
-import websiteIcon from '../../assets/icon-website.svg';
-import companyIcon from '../../assets/icon-company.svg';
+import { useTheme } from '../../hooks/theme';
+
+
+import {ReactComponent as MoonIcon} from '../../assets/icon-moon.svg';
+import {ReactComponent as SunIcon} from '../../assets/icon-sun.svg';
+import {ReactComponent as LocationIcon} from '../../assets/icon-location.svg';
+import {ReactComponent as TwitterIcon} from '../../assets/icon-twitter.svg';
+import {ReactComponent as WebsiteIcon} from '../../assets/icon-website.svg';
+import {ReactComponent as CompanyIcon} from '../../assets/icon-company.svg';
+
 
 const Home:React.FC = () => {
+
+    const { toggleTheme, theme } = useTheme();
+    const [themeStyle, setThemeStyle] = useState(() => theme.title === 'dark' ? true : false);
+
+    console.log("THME STYLE : ", themeStyle);
+
+    const handleChangeTheme = () => {
+        setThemeStyle(!themeStyle);
+        toggleTheme();
+    } 
     return (
         <Container>
             <Content>
                 <Header>
                     <h1>devfinder</h1> 
-                    <span>dark <img src={moonIcon} alt="moon"/></span>   
+                    <div onClick={handleChangeTheme}>
+                        <span>
+                            {themeStyle ? "LIGHT" : "DARK"} 
+                            {themeStyle ? 
+                                <SunIcon /> :
+                                <MoonIcon />
+                            }                  
+                        </span>   
+                    </div>
                 </Header>
 
                 <SearchBar>
@@ -76,22 +100,22 @@ const Home:React.FC = () => {
                         <FooterInfo>
                             <CityInfo>
                                 <div className="city-info">
-                                    <img src={locationIcon} alt="location"/>
+                                    <LocationIcon />
                                     <span>San Francisco</span>
                                 </div>
                                 <div className="twitter-info">
-                                    <img src={twitterIcon} alt="twitter"/>
+                                    <TwitterIcon />
                                     <span>Not Available</span>
                                 </div>
                             </CityInfo>
 
                             <BlogInfo>
                                 <div className="web-site-info">
-                                    <img src={websiteIcon} alt="web-site"/>
+                                    <WebsiteIcon />
                                     <a href="https://github.blog" rel="noreferrer" target="_blank">https://github.blog</a>
                                 </div>
                                 <div className="github-info">
-                                    <img src={companyIcon} alt="company"/>
+                                    <CompanyIcon />
                                     <span>@github</span>
                                 </div>
                             </BlogInfo>
