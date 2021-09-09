@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+interface SearchBarProps{
+    userNotFound: boolean;
+}
+
 export const Container = styled.div`
     height: 100vh;
     width: 100%;
@@ -67,7 +71,7 @@ export const Header = styled.div`
 `;
 
 
-export const SearchBar = styled.div`
+export const SearchBar = styled.div<SearchBarProps>`
     width: 100%;
     height: 69px;            
     background: ${({theme}) => theme.color.lightText};
@@ -87,6 +91,7 @@ export const SearchBar = styled.div`
         font-size: 18px;            
         background: ${({theme}) => theme.color.lightText};
         width: 282px;
+        margin-right: 6px;
         border: none;
         color: ${({theme}) => theme.color.tertiary};
         ::placeholder{
@@ -96,6 +101,13 @@ export const SearchBar = styled.div`
         :focus{         
             outline: none;   
         }
+    }
+
+    p {
+        font-size: 12px;
+        color: red;
+        margin: auto;
+        display: ${props => props.userNotFound ? "block" : "none"};
     }
 
     button {
@@ -109,20 +121,38 @@ export const SearchBar = styled.div`
         color: #fff;
         font-size: 15px;
         font-weight: bold;
+        transition: filter .3s;
+
+        :hover{
+            filter: opacity(0.6);
+        }
     }
     
+    /* Tablet Version */
+    @media(min-width: 540px) and (max-width: 767px){
+        p {     
+            margin: 0;
+            display: ${props => props.userNotFound ? "block" : "none"};
+        }  
+    }
+
     /* Mobile Version */
     @media(max-width: 539px){  
+        p {     
+            margin: 0;
+            display: ${props => props.userNotFound ? "block" : "none"};
+        }  
 
         img {
-            margin-left: 16px;
-            margin-right: 6px;
+            margin-left: 6px;
+            margin-right: 3px;
         }
 
         input {     
-            font-size: 13px;            
+            font-size: 12px;            
             background: ${({theme}) => theme.color.lightText};
-            width: 189px;
+            width: 126px;
+            margin-right: 6px;
             border: none;
             color: ${({theme}) => theme.color.tertiary};
         }      

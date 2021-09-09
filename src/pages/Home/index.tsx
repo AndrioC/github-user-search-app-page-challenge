@@ -52,7 +52,7 @@ const Home:React.FC = () => {
     const [themeStyle, setThemeStyle] = useState(() => theme.title === 'dark' ? true : false);
 
     const [username, setUsername] = useState('');
-    const [userNotFound, setUserNotFound] = useState(false);
+    const [userNotFound, setUserNotFound] = useState("false");
 
     const [info, setInfo] = useState<UserProps>();
 
@@ -64,7 +64,7 @@ const Home:React.FC = () => {
             if (response.status === 200){
                 setInfo(response.data);
             } else if (response.status === 404){
-                setUserNotFound(true);
+                setUserNotFound("true");
             }
         } catch (err){
             console.log(err);
@@ -80,6 +80,7 @@ const Home:React.FC = () => {
             <Content>
                 <Header>
                     <h1>devfinder</h1> 
+                    <h1>{userNotFound}-</h1> 
                     <div onClick={handleChangeTheme}>
                         <span>
                             {themeStyle ? "LIGHT" : "DARK"} 
@@ -91,13 +92,14 @@ const Home:React.FC = () => {
                     </div>
                 </Header>
 
-                <SearchBar>
+                <SearchBar userNotFound={true}>
                     <img src={searchIcon} alt="search"/>
                     <input 
                         type="text" 
                         placeholder="Search GitHub username..."
                         onChange={(e) => setUsername(e.target.value)}
                     />
+                    {/* <p>No results</p> */}
                     <button 
                         type="button"
                         onClick={getInfo}
