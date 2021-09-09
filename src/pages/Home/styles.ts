@@ -219,16 +219,21 @@ export const HeaderInfo = styled.div`
     align-items: center;
     width: 100%;
     justify-content: space-between;
+    position: relative;
 
     h3 {
         font-size: 27px;
         font-weight: bold;            
         color: ${({theme}) => theme.color.text};
+        position: absolute;
+        left: 0;
     }
 
     span {
         margin-right: 48px;
         font-size: 15px;               
+        position: absolute;
+        top: 15px;
         color: ${({theme}) => theme.color.secondary};
     }
 
@@ -236,6 +241,14 @@ export const HeaderInfo = styled.div`
     @media(min-width: 540px) and (max-width: 767px){
         display: flex;
         flex-direction: column;
+        h3 {
+            font-size: 24px;
+            font-weight: bold;            
+            color: ${({theme}) => theme.color.text};
+            position: absolute;
+            left: 183px;
+            top: -30px;
+        }
 
         span {
             margin-right: 13px;
@@ -252,10 +265,13 @@ export const HeaderInfo = styled.div`
             font-size: 15px;
             font-weight: bold;            
             color: ${({theme}) => theme.color.text};
+            position: absolute;
+            left: 118px;
         }
 
         span {
             margin-left: 90px;
+            margin-top: 10px;
             font-size: 13px;               
             color: ${({theme}) => theme.color.secondary};
         }
@@ -265,7 +281,7 @@ export const HeaderInfo = styled.div`
 
 
 export const UserNameInfo = styled.div`
-    margin-top: 3px;
+    margin-top: 33px;
     span {
         color: ${({theme}) => theme.color.primary};
     }
@@ -277,7 +293,10 @@ export const UserNameInfo = styled.div`
     
     /* Mobile Version */
     @media(max-width: 539px){
-        margin-right: 20px;
+    margin-top: 39px;
+       span {
+        margin-right: 30px;
+       }
     }
 
 `;
@@ -422,7 +441,7 @@ export const CityInfo = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-left: 120px;
+        margin-left: 60px;
 
         span {
             margin-left: 21px;

@@ -17,6 +17,8 @@ import {
     BlogInfo,
 } from './styles'
 
+import api from '../../services/api';
+
 import moonIcon from '../../assets/icon-moon.svg';
 import searchIcon from '../../assets/icon-search.svg';
 import { useTheme } from '../../hooks/theme';
@@ -29,13 +31,45 @@ import {ReactComponent as TwitterIcon} from '../../assets/icon-twitter.svg';
 import {ReactComponent as WebsiteIcon} from '../../assets/icon-website.svg';
 import {ReactComponent as CompanyIcon} from '../../assets/icon-company.svg';
 
+interface UserProps{
+    name: string;
+    avatar_url: string;
+    created_at: Date;
+    login: string;
+    bio: string;
+    public_repos: number;
+    followers: number;
+    following: number;
+    location: string;
+    twitter_username: string;
+    blog: string;
+    company: string;
+}
 
 const Home:React.FC = () => {
 
     const { toggleTheme, theme } = useTheme();
     const [themeStyle, setThemeStyle] = useState(() => theme.title === 'dark' ? true : false);
 
-    console.log("THME STYLE : ", themeStyle);
+    const [username, setUsername] = useState('');
+    const [userNotFound, setUserNotFound] = useState(false);
+
+    const [info, setInfo] = useState<UserProps>();
+
+
+    async function getInfo(){
+        try {
+            const response = await api.get(`/${username}`);
+
+            if (response.status === 200){
+                setInfo(response.data);
+            } else if (response.status === 404){
+                setUserNotFound(true);
+            }
+        } catch (err){
+            console.log(err);
+        }
+    }
 
     const handleChangeTheme = () => {
         setThemeStyle(!themeStyle);
@@ -59,44 +93,58 @@ const Home:React.FC = () => {
 
                 <SearchBar>
                     <img src={searchIcon} alt="search"/>
-                    <input type="text" placeholder="Search GitHub username..."/>
-                    <button type="button">Search</button>
+                    <input 
+                        type="text" 
+                        placeholder="Search GitHub username..."
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <button 
+                        type="button"
+                        onClick={getInfo}
+                    >
+                        Search
+                    </button>
                 </SearchBar>
 
                 <ShowInfoContainer>
                     <ProfileImage>
-                        <img src={moonIcon} alt="profile"/>
+                        <img 
+                            src={
+                            info?.avatar_url ? 
+                            info.avatar_url : 
+                            moonIcon} 
+                            alt="profile"
+                        />
                     </ProfileImage>
 
                     <ShowInfo>
                         <HeaderInfo>
-                            <h3>The Octocat</h3>
+                            <h3>{info?.name ? info.name : "The Octocat"}</h3>
                             <span>Joined 25 Jan 2011</span>
                         </HeaderInfo>
 
                         <UserNameInfo>
-                            <span>@octocat</span>
+                            <span>@{info?.login ? info.login : "octocat"}</span>
                         </UserNameInfo>
 
                         <InfoBio>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. 
-                                Donec odio. Quisque volutpat mattis eros.
+                                {info?.bio ? info.bio : "Not available"}
                             </p>
                         </InfoBio>
 
                         <RepoInfo>
                             <div className="repo-qtd">
                                 <span>Repos</span>
-                                <h3>8</h3>
+                                <h3>{info?.public_repos ? info.public_repos : 0}</h3>
                             </div>
                             <div className="followers-qtd">
-                                <span>Followers</span>
-                                <h3>3938</h3>                                
+                                <span>Followers</span>      
+                                <h3>{info?.followers ? info.followers : 0}</h3>                 
                             </div>
                             <div className="following-qtd">
                                 <span>Following</span>
-                                <h3>9</h3>                                
+                                <h3>{info?.following ? info.following : 0}</h3>                         
                             </div>
                         </RepoInfo>
 
@@ -104,22 +152,27 @@ const Home:React.FC = () => {
                             <CityInfo>
                                 <div className="city-info">
                                     <LocationIcon />
-                                    <span>San Francisco</span>
+                                    <span>{info?.location ? info.location : "Not available"}</span>
                                 </div>
                                 <div className="twitter-info">
                                     <TwitterIcon />
-                                    <span>Not Available</span>
+                                    <span>{info?.twitter_username ? info.twitter_username : "Not available"}</span>
                                 </div>
                             </CityInfo>
 
                             <BlogInfo>
                                 <div className="web-site-info">
                                     <WebsiteIcon />
-                                    <a href="https://github.blog" rel="noreferrer" target="_blank">https://github.blog</a>
+                                    <a 
+                                        href={info?.blog ? info.blog : '_target'}
+                                        rel="noreferrer" target="_blank"
+                                    >
+                                        {info?.blog ? info.blog : "Not available"}
+                                    </a>
                                 </div>
                                 <div className="github-info">
                                     <CompanyIcon />
-                                    <span>@github</span>
+                                    <span>{info?.company ? info.company : "Not available"}</span>
                                 </div>
                             </BlogInfo>
                         </FooterInfo>
