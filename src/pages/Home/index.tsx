@@ -40,9 +40,9 @@ const Home:React.FC = () => {
                 </SearchBar>
 
                 <ShowInfoContainer>
-                    <ProfileImage 
-                        src={moonIcon}
-                    />
+                    <ProfileImage>
+                        <img src={moonIcon} alt="profile"/>
+                    </ProfileImage>
 
                     <ShowInfo>
                         <HeaderInfo>
@@ -61,36 +61,36 @@ const Home:React.FC = () => {
                         <RepoInfo>
                             <div className="repo-qtd">
                                 <span>Repos</span>
-                                <span>8</span>
+                                <h3>8</h3>
                             </div>
                             <div className="followers-qtd">
                                 <span>Followers</span>
-                                <span>3938</span>                                
+                                <h3>3938</h3>                                
                             </div>
                             <div className="following-qtd">
                                 <span>Following</span>
-                                <span>9</span>                                
+                                <h3>9</h3>                                
                             </div>
                         </RepoInfo>
 
                         <FooterInfo>
                             <CityInfo>
-                                <div>
+                                <div className="city-info">
                                     <img src={locationIcon} alt="location"/>
                                     <span>San Francisco</span>
                                 </div>
-                                <div>
+                                <div className="twitter-info">
                                     <img src={twitterIcon} alt="twitter"/>
                                     <span>Not Available</span>
                                 </div>
                             </CityInfo>
 
                             <BlogInfo>
-                                <div>
+                                <div className="web-site-info">
                                     <img src={websiteIcon} alt="web-site"/>
                                     <a href="https://github.blog" rel="noreferrer" target="_blank">https://github.blog</a>
                                 </div>
-                                <div>
+                                <div className="github-info">
                                     <img src={companyIcon} alt="company"/>
                                     <span>@github</span>
                                 </div>
