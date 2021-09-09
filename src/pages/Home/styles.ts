@@ -297,7 +297,7 @@ export const InfoBio = styled.div`
 
     /* Tablet Version */
     @media(min-width: 540px) and (max-width: 767px){
-        margin-top: 48px;
+        margin-top: 30px;
     }
     
     /* Mobile Version */
@@ -383,6 +383,11 @@ export const FooterInfo = styled.div`
     display: flex;
     flex-direction: column;
     margin-top: 39px;
+
+    /* Tablet Version */
+    @media(min-width: 540px) and (max-width: 767px){
+        margin-top: 20px;
+    }
 
     /* Mobile Version */
     @media(max-width: 539px){
